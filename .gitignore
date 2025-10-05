@@ -1,0 +1,246 @@
+# =============================================================================
+# GITIGNORE - CHATBOT PROJECT
+# =============================================================================
+
+# =============================================================================
+# FICHIERS D'ENVIRONNEMENT SENSIBLES
+# =============================================================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.backup
+
+# =============================================================================
+# LOGS ET FICHIERS TEMPORAIRES
+# =============================================================================
+logs/
+*.log
+*.log.*
+*.tmp
+*.temp
+.cache/
+
+# =============================================================================
+# DONNÉES DOCKER ET VOLUMES
+# =============================================================================
+.docker/
+docker-compose.override.yml
+.dockerignore.local
+
+# Volumes Docker persistants (si créés localement)
+postgres_data/
+ollama_data/
+pgadmin_data/
+
+# =============================================================================
+# SAUVEGARDES DE BASE DE DONNÉES
+# =============================================================================
+backups/
+*.sql.backup
+*.dump
+*.backup
+
+# =============================================================================
+# CLÉS ET CERTIFICATS
+# =============================================================================
+*.key
+*.pem
+*.crt
+*.p12
+*.pfx
+ssl/
+certs/
+
+# =============================================================================
+# CONFIGURATION IDE
+# =============================================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# =============================================================================
+# SYSTÈME D'EXPLOITATION
+# =============================================================================
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# =============================================================================
+# BACKEND PYTHON
+# =============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# =============================================================================
+# FRONTEND NODE.JS
+# =============================================================================
+node_modules/
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+/frontend/coverage
+
+# production
+/build
+/frontend/build
+
+# misc
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json.backup
+
+# =============================================================================
+# DONNÉES ET UPLOADS
+# =============================================================================
+uploads/
+documents/
+temp_files/
+*.uploaded
+media/
+
+# =============================================================================
+# CONFIGURATION LOCALE
+# =============================================================================
+config.local.*
+settings.local.*
+local_settings.py
+.local
+
+# =============================================================================
+# MONITORING ET METRICS
+# =============================================================================
+.monitoring/
+metrics/
+grafana_data/
+prometheus_data/
+
+# =============================================================================
+# TESTS ET DEBUGGING
+# =============================================================================
+.coverage
+.pytest_cache/
+test_results/
+debug_output/
+*.test.log

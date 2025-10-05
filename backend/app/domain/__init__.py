@@ -1,0 +1,3 @@
+"""
+Package Domain - Logique métier
+"""

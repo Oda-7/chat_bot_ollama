@@ -1,0 +1,120 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: chatbot_postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init_db.sh:/docker-entrypoint-initdb.d/init_db.sh
+    ports:
+      - '${POSTGRES_EXTERNAL_PORT}:5432'
+    networks:
+      - chatbot_network
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: chatbot_backend
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      SECRET_KEY: ${SECRET_KEY}
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${ACCESS_TOKEN_EXPIRE_MINUTES}
+      ENVIRONMENT: ${ENVIRONMENT}
+      LOG_LEVEL: ${LOG_LEVEL}
+      CORS_ORIGINS: ${CORS_ORIGINS}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      TZ: Europe/Paris
+    volumes:
+      - ./backend/app:/app/app
+      - ./backend/logs:/app/logs
+    ports:
+      - '${BACKEND_PORT}:8000'
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: []
+    networks:
+      - chatbot_network
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:8000/api/docs']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: chatbot_frontend
+    ports:
+      - '${FRONTEND_PORT}:3000'
+    environment:
+      REACT_APP_API_BASE_URL: ${REACT_APP_API_BASE_URL}
+    depends_on:
+      - backend
+    networks:
+      - chatbot_network
+    volumes:
+      - ./frontend/src:/app/src
+      - /app/node_modules
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: chatbot_ollama
+    entrypoint: ['/bin/sh', '/root/ollama-entrypoint.sh']
+    ports:
+      - '${OLLAMA_EXTERNAL_PORT}:11434'
+    volumes:
+      - ./ollama-entrypoint.sh:/root/ollama-entrypoint.sh
+      - ollama_data:/root/.ollama
+    networks:
+      - chatbot_network
+    environment:
+      OLLAMA_HOST: 0.0.0.0
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: chatbot_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    ports:
+      - '${PGADMIN_PORT}:80'
+    depends_on:
+      - postgres
+    networks:
+      - chatbot_network
+
+networks:
+  chatbot_network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: ${DOCKER_NETWORK_SUBNET}
+
+volumes:
+  postgres_data:
+  ollama_data:
+  pgadmin_data:

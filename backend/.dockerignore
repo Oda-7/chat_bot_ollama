@@ -1,0 +1,49 @@
+# Fichiers à exclure du contexte Docker
+
+# Environnement virtuel local
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs locaux
+logs/
+*.log
+
+# Base de données locale
+*.db
+*.sqlite
+*.sqlite3
+
+# Fichiers temporaires
+.tmp/
+temp/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+
+# Tests
+test_*.py
+*_test.py
+
+# Documentation
+README.md
+INSTALL.md
+
+# Fichiers de configuration locale
+.env
+.env.local
+.env.dev
+
+# Cache
+.pytest_cache/
+.coverage

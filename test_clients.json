@@ -1,0 +1,33 @@
+{
+  "entreprise": "TechCorp Solutions",
+  "secteur": "Technologie",
+  "clients": [
+    {
+      "nom": "Dupont SARL",
+      "secteur": "Industrie",
+      "ca_annuel": 2500000,
+      "contact": "marie.dupont@dupont.com",
+      "produits": ["ERP", "CRM", "Analytics"]
+    },
+    {
+      "nom": "InnovTech",
+      "secteur": "Technologie",
+      "ca_annuel": 1800000,
+      "contact": "contact@innovtech.fr",
+      "produits": ["Cloud Services", "IA", "Big Data"]
+    },
+    {
+      "nom": "GreenEnergy Corp",
+      "secteur": "Énergie",
+      "ca_annuel": 3200000,
+      "contact": "info@greenenergy.com",
+      "produits": ["Panneaux solaires", "Éoliennes", "Stockage"]
+    }
+  ],
+  "services": {
+    "consulting": "Conseil en transformation digitale",
+    "formation": "Formation aux nouvelles technologies",
+    "support": "Support technique 24/7"
+  },
+  "valeurs": ["Innovation", "Durabilité", "Excellence", "Collaboration"]
+}

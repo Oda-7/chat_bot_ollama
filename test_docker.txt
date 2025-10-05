@@ -1,0 +1,9 @@
+Docker est une plateforme de conteneurisation qui permet de créer, déployer et exécuter des applications dans des conteneurs. Les conteneurs sont des unités logicielles légères et portables qui contiennent tout ce dont une application a besoin pour fonctionner.
+
+Les avantages principaux de Docker :
+- Isolation des applications
+- Portabilité entre environnements
+- Facilité de déploiement
+- Gestion simplifiée des dépendances
+
+Docker Compose est un outil pour définir et exécuter des applications Docker multi-conteneurs. Il utilise un fichier YAML pour configurer les services de l'application.
